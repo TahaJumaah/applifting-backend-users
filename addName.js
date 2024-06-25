@@ -6,12 +6,15 @@ async function addName(req, res) {
   const client = new Client(config);
 
   const userName = req.body.name;
-  await client.connect();
+  console.log("USERNAME HERE //////////");
+  console.log(req.body.name);
 
-  if (typeof req.body.name === "number") {
-    res.send("Name not added");
+  if (!userName || userName.length < 2 || typeof userName === "number") {
+    console.log("USERNAM NOT A NAME");
+    res.status("444").send("Please provide a name for the user");
   } else {
     try {
+      await client.connect();
       const response = await client.query(
         `INSERT INTO names (name, uuid) VALUES ($1, $2)`,
         [userName, uuid.v4()]

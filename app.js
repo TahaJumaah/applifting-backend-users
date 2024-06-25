@@ -14,8 +14,9 @@ const getAllNames = require("./getAllNames");
 app.use(cors());
 app.use(express.json());
 app.get("/", getAllNames);
-app.get("/api/addname", addName);
-app.get("/api/deletename", deleteName);
+app.use(bodyParser);
+app.post("/api/addname", addName);
+app.post("/api/deletename", deleteName);
 const client = new pg.Client(config);
 client.connect(function (err) {
   if (err) throw err;
