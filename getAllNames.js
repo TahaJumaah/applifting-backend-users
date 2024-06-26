@@ -8,9 +8,10 @@ async function getAllNames(req, res) {
   await client.connect();
 
   try {
+    // client.query("CREATE TABLE names  (name VARCHAR(255), uuid VARCHAR(255)) ");
     const response = await client.query("SELECT * FROM names");
 
-    console.log(response);
+    console.log(response.rows);
 
     res.json(response.rows);
   } catch (error) {

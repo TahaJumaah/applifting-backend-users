@@ -1,17 +1,17 @@
 const { Client } = require("pg");
 const config = require("./DbConfig");
-const { response } = require("express");
 const uuid = require("uuid");
 async function addName(req, res) {
   const client = new Client(config);
 
-  const userName = req.body.name;
+  const userName = req.body.username;
   console.log("USERNAME HERE //////////");
-  console.log(req.body.name);
+  console.log(req.body);
+  console.log(req.body.username);
 
   if (!userName || userName.length < 2 || typeof userName === "number") {
     console.log("USERNAM NOT A NAME");
-    res.status("444").send("Please provide a name for the user");
+    res.status(444).send("Please provide a name for the user");
   } else {
     try {
       await client.connect();
